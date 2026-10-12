@@ -45,7 +45,7 @@ Edit `data/scenarios.ts`, `data/contacts.ts`, and `data/locations.ts` to change 
 
 ## Metadata and deployment
 
-Copy `.env.example` to `.env.local` if configuring an origin. Set `NEXT_PUBLIC_SITE_URL` to the actual deployed origin **before building** so canonical, sitemap, and social URLs resolve correctly. Without configuration it defaults to localhost, and no domain ownership is implied.
+No custom environment variables are required. Canonical, sitemap, and social URLs automatically use Vercel’s production domain (`VERCEL_PROJECT_PRODUCTION_URL`), with the deployment domain (`VERCEL_URL`) as a fallback. Local development defaults to `http://localhost:3000`.
 
 Only `/` and `/about` are in the sitemap. Feature pages emit `noindex, follow`; robots permits crawling so search engines can read those directives. The shared 1672 × 941 social image (`public/opengraph-image.webp`) is converted from the supplied CampusCue artwork without cropping. The application icon and favicon are also local assets; regenerate those icons with `bun run assets`. The asset script uses Sharp. After deployment, verify the actual origin in Google Search Console; this local build does not perform verification or publication.
 

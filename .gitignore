@@ -30,7 +30,7 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# Local environment files; keep the configuration template
+# Local environment files
 .env*
 
 # vercel
@@ -43,7 +43,6 @@ next-env.d.ts
 # Browser test output
 /test-results/
 /playwright-report/
-!.env.example
 
 # Additional generated test reports and caches
 /blob-report/
