@@ -30,7 +30,7 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# Local environment files; keep the configuration template
 .env*
 
 # vercel
@@ -39,3 +39,27 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Browser test output
+/test-results/
+/playwright-report/
+!.env.example
+
+# Additional generated test reports and caches
+/blob-report/
+/playwright/.cache/
+/.cache/
+/.turbo/
+
+# Local logs and editor/agent state
+*.log
+.idea/
+.agents/
+.codex/
+
+# Unused Create Next App starter assets
+/public/file.svg
+/public/globe.svg
+/public/next.svg
+/public/vercel.svg
+/public/window.svg

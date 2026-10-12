@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CampusCue
 
-## Getting Started
+A responsive, frontend-only campus safety awareness prototype built with Next.js 16.4, TypeScript, Tailwind CSS 4, and shadcn/ui (Radix Nova). It follows `docs/design.md` and `docs/spec.md`.
 
-First, run the development server:
+## Run locally
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Install Bun (the project uses Bun 1.4.3), then:
+
+```sh
+bun install
+bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. There is no authentication, database, or external runtime API. Inter fonts and the illustrative campus photograph are served locally.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Appearance
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Use the theme toggle in the header to select Light, Dark, or System. The default follows the device preference, and an explicit selection persists across reloads and routes via `next-themes`. All pages and overlay menus use shared theme tokens.
 
-## Learn More
+## Pages
 
-To learn more about Next.js, take a look at the following resources:
+- `/`: landing page and entry points.
+- `/help`: three fictional scenarios, predefined instructions, contact and location links. Supports `?scenario=medical`, `safety`, or `accident`; unsupported values show a recoverable fallback.
+- `/contacts`: fictional directory with combined search and category filters. Scenario links use `?contact=health` or `security`.
+- `/locations`: case-insensitive code lookup plus building and landmark search. Supports direct links such as `?code=LIB-G-01`.
+- `/about`: educational purpose, research scope, and limitations.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Validate
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```sh
+bun run lint
+bun run test
+bun run build
+bunx playwright install chromium
+bun run test:e2e
+```
 
-## Deploy on Vercel
+The component tests cover selection, cross-page references, filtering, empty states, location searches, and explanatory pages. Playwright tests exercise complete flows, independent routes, metadata, mobile navigation, page errors, and overflow on desktop and mobile against the production build. `bun run test:watch` starts the Vitest watcher.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project layout
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The existing root `app/` convention is retained. `components/ui/` contains shadcn components; shared components live in `components/`; interactive flows live in `features/`; typed local fixtures live in `data/`; search and metadata helpers live in `lib/`.
+
+Edit `data/scenarios.ts`, `data/contacts.ts`, and `data/locations.ts` to change fictional examples. These sample scripts are educational content, not clinically reviewed emergency instructions. Appropriate content review is required before changing them into real-world guidance.
+
+## Metadata and deployment
+
+Copy `.env.example` to `.env.local` if configuring an origin. Set `NEXT_PUBLIC_SITE_URL` to the actual deployed origin **before building** so canonical, sitemap, and social URLs resolve correctly. Without configuration it defaults to localhost, and no domain ownership is implied.
+
+Only `/` and `/about` are in the sitemap. Feature pages emit `noindex, follow`; robots permits crawling so search engines can read those directives. The shared 1672 × 941 social image (`public/opengraph-image.webp`) is converted from the supplied CampusCue artwork without cropping. The application icon and favicon are also local assets; regenerate those icons with `bun run assets`. The asset script uses Sharp. After deployment, verify the actual origin in Google Search Console; this local build does not perform verification or publication.
+
+```sh
+bun run build
+bun run start
+```
+
+## Limitations
+
+This is an educational simulation. All contacts and locations are fictional; sample numbers do not initiate calls. CampusCue cannot report incidents, dispatch help, request GPS access, provide live tracking, or connect to emergency services. It must not be used as a real emergency service.
+
+## Image credit
+
+Illustrative student graduation photograph: [Unsplash](https://images.unsplash.com/photo-1541339907198-e08756dedf3f), downloaded and served as `public/images/campus.jpg`. It does not represent the fictional campus in the dataset. The image contains no emergency scene or campus endorsement.

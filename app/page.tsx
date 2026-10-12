@@ -1,69 +1,187 @@
+import Link from "next/link";
 import Image from "next/image";
-
+import {
+  ArrowRight,
+  ArrowUpRight,
+  HeartPulse,
+  MapPin,
+  BookOpen,
+  ShieldCheck,
+  Phone,
+  MoveDown,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { DemoNotice } from "@/components/demo-notice";
+import { Separator } from "@/components/ui/separator";
+const features = [
+  {
+    n: "01",
+    icon: HeartPulse,
+    title: "Know your next step.",
+    text: "Walk through fictional situations and practice identifying a relevant next step.",
+    href: "/help",
+    action: "Practice a scenario",
+    detail: "Medical concerns · Personal safety · Campus accidents",
+  },
+  {
+    n: "02",
+    icon: Phone,
+    title: "Know who to contact.",
+    text: "Explore a simple directory. Get familiar with the people and roles that support a campus.",
+    href: "/contacts",
+    action: "Explore contacts",
+    detail: "Security · Health centre · Hostel wardens",
+  },
+  {
+    n: "03",
+    icon: MapPin,
+    title: "Know where you are.",
+    text: "Turn a sample location code into a building, floor, and landmark you can describe.",
+    href: "/locations",
+    action: "Find a location",
+    detail: "Sample codes · Buildings · Landmarks",
+  },
+];
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <main id="main-content" className="home">
+      <section className="hero container">
+        <div className="hero-eyebrow">
+          <span className="small-dot" /> CAMPUS SAFETY, ONE STEP AT A TIME
+        </div>
+        <div className="hero-grid">
+          <h1>
+            Find your
+            <br />
+            next step<span className="hero-period">.</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <div className="hero-copy">
+            <p>
+              A familiar campus.
+              <br />
+              An unfamiliar situation.
+            </p>
+            <p>
+              Practice what comes next with simple scenarios, sample contacts,
+              and clearer location guidance.
+            </p>
+            <Button asChild variant="outline" size="lg">
+              <Link href="/help">
+                Practice a scenario
+                <ArrowUpRight data-icon="inline-end" />
+              </Link>
+            </Button>
+            <span className="hero-footnote">
+              <ShieldCheck aria-hidden="true" /> A safe space to learn.
+              Simulation only.
+            </span>
+          </div>
+        </div>
+        <div className="hero-bottom">
+          <span>Built by students. For student awareness.</span>
+          <a href="#explore" aria-label="Explore the prototype">
+            <MoveDown aria-hidden="true" />
+          </a>
+          <span>NO SIGN-UP. JUST EXPLORATION.</span>
+        </div>
+      </section>
+      <figure className="campus-photo">
+        <div className="campus-photo-media">
+          <Image
+            src="/images/campus.jpg"
+            alt="Students in graduation gowns tossing their caps outdoors with a city skyline in the distance; illustrative student photography."
+            fill
+            priority
+            sizes="100vw"
+          />
+        </div>
+        <figcaption>
+          <span>
+            A little more familiar.
+            <br />A little more prepared.
+          </span>
+          <span>CAMPUSCUE / AWARENESS STARTS HERE</span>
+        </figcaption>
+      </figure>
+      <section id="explore" className="container explore-section">
+        <div className="section-intro">
+          <Badge variant="outline">THREE WAYS TO PRACTICE</Badge>
+          <h2>
+            Clarity starts
+            <br />
+            with a little practice.
+          </h2>
+          <p>
+            You don’t need to know everything.
+            <br />
+            Start by knowing where to look.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="feature-grid">
+          {features.map((f) => (
+            <Card key={f.n} className="cinematic-card">
+              <CardHeader>
+                <div className="feature-top">
+                  <f.icon aria-hidden="true" strokeWidth={1.3} />
+                  <span>{f.n} /</span>
+                </div>
+                <CardTitle>
+                  <h3>{f.title}</h3>
+                </CardTitle>
+                <CardDescription>{f.text}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p>{f.detail}</p>
+              </CardContent>
+              <CardFooter>
+                <Button asChild variant="outline">
+                  <Link href={f.href}>
+                    {f.action}
+                    <ArrowRight data-icon="inline-end" />
+                  </Link>
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
         </div>
-      </main>
-    </div>
+      </section>
+      <section className="container purpose-section">
+        <Separator />
+        <div className="purpose-grid">
+          <div className="eyebrow">
+            <BookOpen aria-hidden="true" /> MADE FOR LEARNING
+          </div>
+          <div>
+            <h2>
+              Preparedness is a practice.
+              <br />
+              Let’s make it approachable.
+            </h2>
+            <p>
+              CampusCue is a student-built campus safety awareness prototype. It
+              explores how clearer information can help students practice
+              finding contacts and communicating locations through simulated
+              scenarios.
+            </p>
+            <Button asChild variant="outline">
+              <Link href="/about">
+                Meet the project
+                <ArrowUpRight data-icon="inline-end" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+        <DemoNotice />
+      </section>
+    </main>
   );
 }
