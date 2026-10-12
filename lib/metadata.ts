@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
-const deploymentHost =
-  process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL;
-export const siteUrl = deploymentHost
-  ? `https://${deploymentHost}`
-  : "http://localhost:3000";
+export const siteUrl = "https://campus-cue.adibuilds.shop";
+
+const socialImage = {
+  url: "/opengraph.webp",
+  width: 1200,
+  height: 630,
+  alt: "CampusCue — Find your next step. Campus safety awareness prototype.",
+};
+
 export function pageMetadata(
   title: string,
   description: string,
@@ -21,21 +25,13 @@ export function pageMetadata(
       url: path,
       siteName: "CampusCue",
       type: "website",
-      images: [
-        {
-          url: "/opengraph-image.webp",
-          width: 1672,
-          height: 941,
-          type: "image/webp",
-          alt: "CampusCue — Find your next step. Campus safety awareness prototype.",
-        },
-      ],
+      images: [socialImage],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ["/opengraph-image.webp"],
+      images: [socialImage],
     },
   };
 }

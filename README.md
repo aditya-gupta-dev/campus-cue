@@ -45,9 +45,9 @@ Edit `data/scenarios.ts`, `data/contacts.ts`, and `data/locations.ts` to change 
 
 ## Metadata and deployment
 
-No custom environment variables are required. Canonical, sitemap, and social URLs automatically use Vercel’s production domain (`VERCEL_PROJECT_PRODUCTION_URL`), with the deployment domain (`VERCEL_URL`) as a fallback. Local development defaults to `http://localhost:3000`.
+No custom environment variables are required. Canonical, sitemap, and social URLs use the confirmed production origin `https://campus-cue.adibuilds.shop`, defined in `lib/metadata.ts`. This keeps shared links pointed at the public custom domain, including when the app is built as a Vercel preview.
 
-Only `/` and `/about` are in the sitemap. Feature pages emit `noindex, follow`; robots permits crawling so search engines can read those directives. The shared 1672 × 941 social image (`public/opengraph-image.webp`) is converted from the supplied CampusCue artwork without cropping. The application icon and favicon are also local assets; regenerate those icons with `bun run assets`. The asset script uses Sharp. After deployment, verify the actual origin in Google Search Console; this local build does not perform verification or publication.
+Only `/` and `/about` are in the sitemap. Feature pages emit `noindex, follow`; robots permits crawling so search engines can read those directives. The shared 1200 × 630 social image (`public/opengraph.webp`) is converted from the supplied CampusCue artwork without cropping, with black padding to fit the social preview dimensions. The application icon and favicon are also local assets; regenerate those icons with `bun run assets`. The asset script uses Sharp. After deployment, verify the actual origin in Google Search Console; this local build does not perform verification or publication.
 
 ```sh
 bun run build
